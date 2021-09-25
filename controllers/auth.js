@@ -21,7 +21,6 @@ const login = async (req, res = response) => {
 
     // Verificar contraseña
     const validPassword = bcrypt.compareSync(password, usuarioDB.password);
-
     if (!validPassword) {
       return res.status(400).json({
         ok: false,
@@ -38,7 +37,6 @@ const login = async (req, res = response) => {
     });
   } catch (error) {
     console.log(error);
-
     res.status(500).json({
       ok: false,
       msg: "Hable con el administrador",
@@ -48,7 +46,6 @@ const login = async (req, res = response) => {
 
 const googleSignIn = async (req, res = response) => {
   const googleToken = req.body.token;
-
   try {
     const { name, email, picture } = await googleVerify(googleToken);
 
@@ -88,20 +85,24 @@ const googleSignIn = async (req, res = response) => {
   }
 };
 
-const renewToken = async(req, res = response) => {
+const renewToken = async (req, res = response) => {
   const uid = req.uid;
 
   // Generar el TOKEN - JWT
   const token = await generarJWT(uid);
 
+  // Obtener el usuario por UID
+  const usuario = await Usuario.findById(uid);
+
   res.json({
     ok: true,
-    token
-});
-}
+    token,
+    usuario,
+  });
+};
 
 module.exports = {
   login,
   googleSignIn,
-  renewToken
+  renewToken,
 };
