@@ -1,4 +1,5 @@
 const { response } = require("express");
+
 const Medico = require("../models/medico");
 
 const getMedicos = async (req, res = response) => {
