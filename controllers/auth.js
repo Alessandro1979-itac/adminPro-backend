@@ -1,10 +1,10 @@
-const { response } = require("express");
-const bcrypt = require("bcryptjs");
+const { response } = require('express');
+const bcrypt = require('bcryptjs');
 
-const Usuario = require("../models/usuario");
-const { generarJWT } = require("../helpers/jwt");
-const { googleVerify } = require("../helpers/google-verify");
-const { getMenuFrontEnd } = require("../helpers/menu-frontend");
+const Usuario = require('../models/usuario');
+const { generarJWT } = require('../helpers/jwt');
+const { googleVerify } = require('../helpers/google-verify');
+const { getMenuFrontEnd } = require('../helpers/menu-frontend');
 
 const login = async (req, res = response) => {
   const { email, password } = req.body;
@@ -16,7 +16,7 @@ const login = async (req, res = response) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: "Email no encontrado",
+        msg: 'Email no encontrado',
       });
     }
 
@@ -25,7 +25,7 @@ const login = async (req, res = response) => {
     if (!validPassword) {
       return res.status(400).json({
         ok: false,
-        msg: "Contraseña no válida",
+        msg: 'Contraseña no válida',
       });
     }
 
@@ -41,7 +41,7 @@ const login = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador",
+      msg: 'Hable con el administrador',
     });
   }
 };
@@ -60,7 +60,7 @@ const googleSignIn = async (req, res = response) => {
       usuario = new Usuario({
         nombre: name,
         email,
-        password: "@@@",
+        password: '@@@',
         img: picture,
         google: true,
       });
@@ -84,7 +84,7 @@ const googleSignIn = async (req, res = response) => {
   } catch (error) {
     res.status(401).json({
       ok: false,
-      msg: "Token no es correcto",
+      msg: 'Token no es correcto',
     });
   }
 };

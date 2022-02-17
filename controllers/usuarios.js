@@ -1,14 +1,14 @@
-const { response } = require("express");
-const bcrypt = require("bcryptjs");
+const { response } = require('express');
+const bcrypt = require('bcryptjs');
 
-const Usuario = require("../models/usuario");
-const { generarJWT } = require("../helpers/jwt");
+const Usuario = require('../models/usuario');
+const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
   const desde = Number(req.query.desde) || 0;
 
   const [usuarios, total] = await Promise.all([
-    Usuario.find({}, "nombre email role google img").skip(desde).limit(5),
+    Usuario.find({}, 'nombre email role google img').skip(desde).limit(5),
 
     Usuario.countDocuments(),
   ]);
@@ -29,7 +29,7 @@ const crearUsuario = async (req, res = response) => {
     if (existeEmail) {
       return res.status(400).json({
         ok: false,
-        msg: "El correo ya está registrado",
+        msg: 'El correo ya está registrado',
       });
     }
 
@@ -54,7 +54,7 @@ const crearUsuario = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Error inesperado... revisar logs",
+      msg: 'Error inesperado... revisar logs',
     });
   }
 };
@@ -70,7 +70,7 @@ const actualizarUsuario = async (req, res = response) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: "No existe un usuario por ese id",
+        msg: 'No existe un usuario por ese id',
       });
     }
 
@@ -82,7 +82,7 @@ const actualizarUsuario = async (req, res = response) => {
       if (existeEmail) {
         return res.status(400).json({
           ok: false,
-          msg: "Ya existe un usuario con ese email",
+          msg: 'Ya existe un usuario con ese email',
         });
       }
     }
@@ -92,7 +92,7 @@ const actualizarUsuario = async (req, res = response) => {
     } else if (usuarioDB.email !== email) {
       return res.status(400).json({
         ok: false,
-        msg: "Usuario de google no pueden cambiar su correo",
+        msg: 'Usuario de google no pueden cambiar su correo',
       });
     }
 
@@ -108,7 +108,7 @@ const actualizarUsuario = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Error inesperado",
+      msg: 'Error inesperado',
     });
   }
 };
@@ -122,7 +122,7 @@ const borrarUsuario = async (req, res = response) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: "No existe un usuario por ese id",
+        msg: 'No existe un usuario por ese id',
       });
     }
 
@@ -130,13 +130,13 @@ const borrarUsuario = async (req, res = response) => {
 
     res.json({
       ok: true,
-      msg: "Usuario eliminado",
+      msg: 'Usuario eliminado',
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador",
+      msg: 'Hable con el administrador',
     });
   }
 };

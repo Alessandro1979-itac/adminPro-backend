@@ -1,14 +1,14 @@
-const jwt = require("jsonwebtoken");
-const Usuario = require("../models/usuario");
+const jwt = require('jsonwebtoken');
+const Usuario = require('../models/usuario');
 
 const validarJWT = (req, res, next) => {
   // Leer el Token
-  const token = req.header("x-token");
+  const token = req.header('x-token');
 
   if (!token) {
     return res.status(401).json({
       ok: false,
-      msg: "No hay token en la petición",
+      msg: 'No hay token en la petición',
     });
   }
 
@@ -20,7 +20,7 @@ const validarJWT = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       ok: false,
-      msg: "Token no válido",
+      msg: 'Token no válido',
     });
   }
 };
@@ -34,14 +34,14 @@ const varlidarADMIN_ROLE = async (req, res, next) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: "Usuario no existe",
+        msg: 'Usuario no existe',
       });
     }
 
-    if (usuarioDB.role !== "ADMIN_ROLE") {
+    if (usuarioDB.role !== 'ADMIN_ROLE') {
       return res.status(403).json({
         ok: false,
-        msg: "No tiene privilegios para hacer eso",
+        msg: 'No tiene privilegios para hacer eso',
       });
     }
 
@@ -50,7 +50,7 @@ const varlidarADMIN_ROLE = async (req, res, next) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador",
+      msg: 'Hable con el administrador',
     });
   }
 };
@@ -65,23 +65,23 @@ const varlidarADMIN_ROLE_o_MismoUsuario = async (req, res, next) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: "Usuario no existe",
+        msg: 'Usuario no existe',
       });
     }
 
-    if (usuarioDB.role === "ADMIN_ROLE" || uid === id) {
+    if (usuarioDB.role === 'ADMIN_ROLE' || uid === id) {
       next();
     } else {
       return res.status(403).json({
         ok: false,
-        msg: "No tiene privilegios para hacer eso",
+        msg: 'No tiene privilegios para hacer eso',
       });
     }
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador",
+      msg: 'Hable con el administrador',
     });
   }
 };
