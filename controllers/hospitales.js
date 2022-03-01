@@ -1,5 +1,5 @@
 const { response } = require('express');
-L
+
 const Hospital = require('../models/hospital');
 
 const getHospitales = async (req, res = response) => {
