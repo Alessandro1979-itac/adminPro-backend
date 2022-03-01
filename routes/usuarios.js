@@ -18,9 +18,9 @@ router.get('/', validarJWT, getUsuarios);
 router.post(
   '/',
   [
-    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('password', 'El password es obligatorio').not().isEmpty(),
-    check('email', 'El email es obligatorio').isEmail(),
+    check('nombre', 'O nome é obrigatório').not().isEmpty(),
+    check('password', 'A senha é obrigatória').not().isEmpty(),
+    check('email', 'O e-mail é obrigatório').isEmail(),
     validarCampos,
   ],
   crearUsuario
@@ -30,9 +30,9 @@ router.put(
   [
     validarJWT,
     varlidarADMIN_ROLE_o_MismoUsuario,
-    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('email', 'El email es obligatorio').isEmail(),
-    check('role', 'El role es obligatorio').not().isEmpty(),
+    check('nombre', 'O nome é obrigatório').not().isEmpty(),
+    check('email', 'A senha é obrigatória').isEmail(),
+    check('role', 'A função é obrigatória').not().isEmpty(),
     validarCampos,
   ],
   actualizarUsuario

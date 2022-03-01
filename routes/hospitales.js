@@ -15,7 +15,7 @@ router.post(
   '/',
   [
     validarJWT,
-    check('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
+    check('nombre', 'O nome do hospital é obrigatório').not().isEmpty(),
     validarCampos,
   ],
   crearHospital
@@ -24,7 +24,7 @@ router.put(
   '/:id',
   [
     validarJWT,
-    check('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
+    check('nombre', 'O nome do hospital é obrigatório').not().isEmpty(),
     validarCampos,
   ],
   actualizarHospital

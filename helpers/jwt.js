@@ -15,7 +15,7 @@ const generarJWT = (uid) => {
       (err, token) => {
         if (err) {
           console.log(err);
-          reject('No se pudo generar el JWT');
+          reject('Falha ao gerar JWT');
         } else {
           resolve(token);
         }

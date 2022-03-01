@@ -8,8 +8,8 @@ const router = Router();
 router.post(
   '/',
   [
-    check('email', 'El email es obligatorio').isEmail(),
-    check('password', 'El password es obligatorio').not().isEmpty(),
+    check('email', 'O e-mail é obrigatório').isEmail(),
+    check('password', 'A senha é obrigatória').not().isEmpty(),
     validarCampos,
   ],
   login
@@ -17,7 +17,7 @@ router.post(
 router.post(
   '/google',
   [
-    check('token', 'El token de Google es obligatorio').not().isEmpty(),
+    check('token', 'O token do Google é obrigatório').not().isEmpty(),
     validarCampos,
   ],
   googleSignIn

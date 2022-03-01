@@ -14,30 +14,30 @@ const fileUpload = (req, res = response) => {
   if (!tiposValidos.includes(tipo)) {
     return res.status(400).json({
       ok: false,
-      msg: 'No es un médico, usuario u hospital (tipo)',
+      msg: 'Não é um médico, usuário ou hospital (tipo)',
     });
   }
 
-  // Validar que exista un archivo
+  // Validar se exista um arquivo
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).json({
       ok: false,
-      msg: 'No hay ningún archivo',
+      msg: 'Não há arquivo',
     });
   }
 
-  // Procesar la imagen...
+  // Procesar a imagen...
   const file = req.files.imagen;
 
-  const nombreCortado = file.name.split('.'); // wolverine.1.3.jpg
+  const nombreCortado = file.name.split('.');
   const extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
-  // Validar extension
+  // Validar extensão
   const extensionesValidas = ['png', 'jpg', 'jpeg', 'gif'];
   if (!extensionesValidas.includes(extensionArchivo)) {
     return res.status(400).json({
       ok: false,
-      msg: 'No es una extensión permitida',
+      msg: 'Não é uma extensão permitida',
     });
   }
 
@@ -53,7 +53,7 @@ const fileUpload = (req, res = response) => {
       console.log(err);
       return res.status(500).json({
         ok: false,
-        msg: 'Error al mover la imagen',
+        msg: 'Erro ao mover a imagem',
       });
     }
 
@@ -62,7 +62,7 @@ const fileUpload = (req, res = response) => {
 
     res.json({
       ok: true,
-      msg: 'Archivo subido',
+      msg: 'arquivo carregado',
       nombreArchivo,
     });
   });
@@ -78,7 +78,7 @@ const retornaImagen = (req, res = response) => {
   if (fs.existsSync(pathImg)) {
     res.sendFile(pathImg);
   } else {
-    const pathImg = path.join(__dirname, `../uploads/no-img.jpg`);
+    const pathImg = path.join(__dirname, '../uploads/no-img.jpg');
     res.sendFile(pathImg);
   }
 };

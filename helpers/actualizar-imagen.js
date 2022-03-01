@@ -6,7 +6,7 @@ const Hospital = require('../models/hospital');
 
 const borrarImagen = (path) => {
   if (fs.existsSync(path)) {
-    // borrar la imagen anterior
+    
     fs.unlinkSync(path);
   }
 };
@@ -18,7 +18,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
     case 'medicos':
       const medico = await Medico.findById(id);
       if (!medico) {
-        console.log('No es un médico por id');
+        console.log('Não existe um médico com esse id');
         return false;
       }
 
@@ -34,7 +34,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
     case 'hospitales':
       const hospital = await Hospital.findById(id);
       if (!hospital) {
-        console.log('No es un hospital por id');
+        console.log('Não existe um hospital com esse id');
         return false;
       }
 
@@ -50,7 +50,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
     case 'usuarios':
       const usuario = await Usuario.findById(id);
       if (!usuario) {
-        console.log('No es un usuario por id');
+        console.log('Não existe um usuário com esse id');
         return false;
       }
 

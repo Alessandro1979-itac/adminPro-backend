@@ -29,7 +29,7 @@ const getMedicoById = async (req, res = response) => {
     console.log(error);
     res.json({
       ok: true,
-      msg: 'Hable con el administrador',
+      msg: 'Fale com o administrador',
     });
   }
 };
@@ -52,7 +52,7 @@ const crearMedico = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'Hable con el administrador',
+      msg: 'Fale com o administrador',
     });
   }
 };
@@ -67,7 +67,7 @@ const actualizarMedico = async (req, res = response) => {
     if (!medico) {
       return res.status(404).json({
         ok: true,
-        msg: 'Medico no encontrado por id',
+        msg: 'Médico não encontrado por id',
       });
     }
 
@@ -91,7 +91,7 @@ const actualizarMedico = async (req, res = response) => {
 
     res.status(500).json({
       ok: false,
-      msg: 'Hable con el administrador',
+      msg: 'Fale com o administrador',
     });
   }
 };
@@ -105,7 +105,7 @@ const borrarMedico = async (req, res = response) => {
     if (!medico) {
       return res.status(404).json({
         ok: true,
-        msg: 'Medico no encontrado por id',
+        msg: 'Médico não encontrado por id',
       });
     }
 
@@ -113,14 +113,14 @@ const borrarMedico = async (req, res = response) => {
 
     res.json({
       ok: true,
-      msg: 'Médico borrado',
+      msg: 'Médico excluído',
     });
   } catch (error) {
     console.log(error);
 
     res.status(500).json({
       ok: false,
-      msg: 'Hable con el administrador',
+      msg: 'Fale com o administrador',
     });
   }
 };

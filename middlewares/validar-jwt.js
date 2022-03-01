@@ -8,7 +8,7 @@ const validarJWT = (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       ok: false,
-      msg: 'No hay token en la petición',
+      msg: 'Não há token na solicitação',
     });
   }
 
@@ -20,7 +20,7 @@ const validarJWT = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       ok: false,
-      msg: 'Token no válido',
+      msg: 'Token inválido',
     });
   }
 };
@@ -34,14 +34,14 @@ const varlidarADMIN_ROLE = async (req, res, next) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: 'Usuario no existe',
+        msg: 'Usuário não existe',
       });
     }
 
     if (usuarioDB.role !== 'ADMIN_ROLE') {
       return res.status(403).json({
         ok: false,
-        msg: 'No tiene privilegios para hacer eso',
+        msg: 'Você não tem privilégios para fazer isso',
       });
     }
 
@@ -50,7 +50,7 @@ const varlidarADMIN_ROLE = async (req, res, next) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'Hable con el administrador',
+      msg: 'Fale com o administrador',
     });
   }
 };
@@ -65,7 +65,7 @@ const varlidarADMIN_ROLE_o_MismoUsuario = async (req, res, next) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: 'Usuario no existe',
+        msg: 'Usuário não existe',
       });
     }
 
@@ -74,14 +74,14 @@ const varlidarADMIN_ROLE_o_MismoUsuario = async (req, res, next) => {
     } else {
       return res.status(403).json({
         ok: false,
-        msg: 'No tiene privilegios para hacer eso',
+        msg: 'Você não tem privilégios para fazer isso',
       });
     }
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'Hable con el administrador',
+      msg: 'Fale com o administrador',
     });
   }
 };
