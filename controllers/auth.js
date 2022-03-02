@@ -25,7 +25,7 @@ const login = async (req, res = response) => {
     if (!validPassword) {
       return res.status(400).json({
         ok: false,
-        msg: 'ContraSenha inválida',
+        msg: 'Senha Inválida',
       });
     }
 
