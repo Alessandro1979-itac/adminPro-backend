@@ -1,24 +1,23 @@
-const Usuario = require('../models/usuario');
-const fs = require('fs');
+const Usuario = require("../models/usuario");
+const fs = require("fs");
 
-const Medico = require('../models/medico');
-const Hospital = require('../models/hospital');
+const Medico = require("../models/medico");
+const Hospital = require("../models/hospital");
 
 const borrarImagen = (path) => {
   if (fs.existsSync(path)) {
-    
     fs.unlinkSync(path);
   }
 };
 
 const actualizarImagen = async (tipo, id, nombreArchivo) => {
-  let pathViejo = '';
+  let pathViejo = "";
 
   switch (tipo) {
-    case 'medicos':
+    case "medicos":
       const medico = await Medico.findById(id);
       if (!medico) {
-        console.log('Não existe um médico com esse id');
+        console.log("Não existe um médico com esse id");
         return false;
       }
 
@@ -31,10 +30,10 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
 
       break;
 
-    case 'hospitales':
+    case "hospitales":
       const hospital = await Hospital.findById(id);
       if (!hospital) {
-        console.log('Não existe um hospital com esse id');
+        console.log("Não existe um hospital com esse id");
         return false;
       }
 
@@ -47,10 +46,10 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
 
       break;
 
-    case 'usuarios':
+    case "usuarios":
       const usuario = await Usuario.findById(id);
       if (!usuario) {
-        console.log('Não existe um usuário com esse id');
+        console.log("Não existe um usuário com esse id");
         return false;
       }
 

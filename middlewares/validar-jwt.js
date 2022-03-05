@@ -1,14 +1,13 @@
-const jwt = require('jsonwebtoken');
-const Usuario = require('../models/usuario');
+const jwt = require("jsonwebtoken");
+const Usuario = require("../models/usuario");
 
-const validarJWT = (req, res, next) => {
-  // Leer el Token
-  const token = req.header('x-token');
+const validarJWT = (req, res, next) => {  
+  const token = req.header("x-token");
 
   if (!token) {
     return res.status(401).json({
       ok: false,
-      msg: 'Não há token na solicitação',
+      msg: "Não há token na solicitação",
     });
   }
 
@@ -20,7 +19,7 @@ const validarJWT = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       ok: false,
-      msg: 'Token inválido',
+      msg: "Token inválido",
     });
   }
 };
@@ -34,14 +33,14 @@ const varlidarADMIN_ROLE = async (req, res, next) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: 'Usuário não existe',
+        msg: "Usuário não existe",
       });
     }
 
-    if (usuarioDB.role !== 'ADMIN_ROLE') {
+    if (usuarioDB.role !== "ADMIN_ROLE") {
       return res.status(403).json({
         ok: false,
-        msg: 'Você não tem privilégios para fazer isso',
+        msg: "Você não tem privilégios para fazer isso",
       });
     }
 
@@ -50,7 +49,7 @@ const varlidarADMIN_ROLE = async (req, res, next) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'Fale com o administrador',
+      msg: "Fale com o administrador",
     });
   }
 };
@@ -65,23 +64,23 @@ const varlidarADMIN_ROLE_o_MismoUsuario = async (req, res, next) => {
     if (!usuarioDB) {
       return res.status(404).json({
         ok: false,
-        msg: 'Usuário não existe',
+        msg: "Usuário não existe",
       });
     }
 
-    if (usuarioDB.role === 'ADMIN_ROLE' || uid === id) {
+    if (usuarioDB.role === "ADMIN_ROLE" || uid === id) {
       next();
     } else {
       return res.status(403).json({
         ok: false,
-        msg: 'Você não tem privilégios para fazer isso',
+        msg: "Você não tem privilégios para fazer isso",
       });
     }
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'Fale com o administrador',
+      msg: "Fale com o administrador",
     });
   }
 };

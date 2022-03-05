@@ -1,43 +1,43 @@
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
-const { response } = require('express');
-const { v4: uuidv4 } = require('uuid');
-const { actualizarImagen } = require('../helpers/actualizar-imagen');
+const { response } = require("express");
+const { v4: uuidv4 } = require("uuid");
+const { actualizarImagen } = require("../helpers/actualizar-imagen");
 
 const fileUpload = (req, res = response) => {
   const tipo = req.params.tipo;
   const id = req.params.id;
 
   // Validar tipo
-  const tiposValidos = ['hospitales', 'medicos', 'usuarios'];
+  const tiposValidos = ["hospitales", "medicos", "usuarios"];
   if (!tiposValidos.includes(tipo)) {
     return res.status(400).json({
       ok: false,
-      msg: 'Não é um médico, usuário ou hospital (tipo)',
+      msg: "Não é um médico, usuário ou hospital (tipo)",
     });
   }
 
-  // Validar se exista um arquivo
+  // Validar que exista un archivo
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).json({
       ok: false,
-      msg: 'Não há arquivo',
+      msg: "Não há nenhum arquivo",
     });
   }
 
-  // Procesar a imagen...
+  // Procesar la imagen...
   const file = req.files.imagen;
 
-  const nombreCortado = file.name.split('.');
+  const nombreCortado = file.name.split("."); // wolverine.1.3.jpg
   const extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
-  // Validar extensão
-  const extensionesValidas = ['png', 'jpg', 'jpeg', 'gif'];
+  // Validar extension
+  const extensionesValidas = ["png", "jpg", "jpeg", "gif"];
   if (!extensionesValidas.includes(extensionArchivo)) {
     return res.status(400).json({
       ok: false,
-      msg: 'Não é uma extensão permitida',
+      msg: "Não é uma extensão permitida",
     });
   }
 
@@ -53,7 +53,7 @@ const fileUpload = (req, res = response) => {
       console.log(err);
       return res.status(500).json({
         ok: false,
-        msg: 'Erro ao mover a imagem',
+        msg: "Erro ao mover a imagem",
       });
     }
 
@@ -62,7 +62,7 @@ const fileUpload = (req, res = response) => {
 
     res.json({
       ok: true,
-      msg: 'arquivo carregado',
+      msg: "arquivo carregado",
       nombreArchivo,
     });
   });
@@ -78,7 +78,7 @@ const retornaImagen = (req, res = response) => {
   if (fs.existsSync(pathImg)) {
     res.sendFile(pathImg);
   } else {
-    const pathImg = path.join(__dirname, '../uploads/no-img.jpg');
+    const pathImg = path.join(__dirname, `../uploads/no-img.jpg`);
     res.sendFile(pathImg);
   }
 };

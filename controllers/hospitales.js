@@ -1,9 +1,9 @@
-const { response } = require('express');
+const { response } = require("express");
 
-const Hospital = require('../models/hospital');
+const Hospital = require("../models/hospital");
 
 const getHospitales = async (req, res = response) => {
-  const hospitales = await Hospital.find().populate('usuario', 'nombre img');
+  const hospitales = await Hospital.find().populate("usuario", "nombre img");
 
   res.json({
     ok: true,
@@ -29,7 +29,7 @@ const crearHospital = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'Fale com o administrador',
+      msg: "Fale com o administrador",
     });
   }
 };
@@ -44,7 +44,7 @@ const actualizarHospital = async (req, res = response) => {
     if (!hospital) {
       return res.status(404).json({
         ok: true,
-        msg: 'Hospital não encontrado pelo id',
+        msg: "Hospital não encontrado pelo id",
       });
     }
 
@@ -68,7 +68,7 @@ const actualizarHospital = async (req, res = response) => {
 
     res.status(500).json({
       ok: false,
-      msg: 'Fale com o administrador',
+      msg: "Fale com o administrador",
     });
   }
 };
@@ -82,7 +82,7 @@ const borrarHospital = async (req, res = response) => {
     if (!hospital) {
       return res.status(404).json({
         ok: true,
-        msg: 'Hospital não encontrado por id',
+        msg: "Hospital não encontrado por id",
       });
     }
 
@@ -90,14 +90,14 @@ const borrarHospital = async (req, res = response) => {
 
     res.json({
       ok: true,
-      msg: 'Hospital eliminado',
+      msg: "Hospital excluído",
     });
   } catch (error) {
     console.log(error);
 
     res.status(500).json({
       ok: false,
-      msg: 'Fale com o administrador',
+      msg: "Fale com o administrador",
     });
   }
 };
