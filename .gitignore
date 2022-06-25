@@ -1,6 +1,8 @@
 node_modules/
 
+# dotenv environment variables file
 .env
+.env.test
 
 uploads/hospitales/**.jpg
 uploads/hospitales/**.png
